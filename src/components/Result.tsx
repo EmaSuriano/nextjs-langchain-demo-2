@@ -4,7 +4,10 @@ type Props = {
   prompt: string;
 };
 
-const API = 'http://localhost:3000/api?';
+const API =
+  process.env.NODE_ENV === 'production'
+    ? 'https://nextjs-langchain-demo-2.vercel.app/api?'
+    : 'http://localhost:3000/api?';
 
 const Result = async ({ prompt }: Props) => {
   const params = new URLSearchParams();
