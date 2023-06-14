@@ -1,10 +1,14 @@
 import Image from 'next/image';
-import Input from '../../components/Input';
-import Result from '../../components/Result';
+import Input from '@/components/Input';
+import Result from '@/components/Result';
 
-export default function Home(props) {
+type Props = {
+  searchParams: { prompt?: string };
+};
+
+export default function Home(props: Props) {
   const { prompt = '' } = props.searchParams;
-  console.log(prompt);
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
