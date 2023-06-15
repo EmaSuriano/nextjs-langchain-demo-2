@@ -3,6 +3,10 @@ import { BaseChain, LLMChain } from 'langchain/chains';
 import { NextResponse } from 'next/server';
 import { PromptTemplate } from 'langchain/prompts';
 
+export const config = {
+  runtime: 'edge',
+};
+
 const llm = new OpenAI({
   openAIApiKey: process.env.OPENAI_API_KEY,
   streaming: true,

@@ -13,7 +13,7 @@ const API =
 
 const fetchStreamingData = async (
   request: Request,
-  onRead: (value: Uint8Array) => void,
+  onRead: (value: Uint8Array | undefined) => void,
 ) => {
   const response = await fetch(request);
 
@@ -23,16 +23,13 @@ const fetchStreamingData = async (
 
   const reader = response.body.getReader();
 
-  return reader
-    .read()
-    .then(function processText({ done, value }): Promise<undefined> {
-      if (done) {
-        return Promise.resolve(undefined);
-      }
+  let done = false;
 
-      onRead(value);
-      return reader.read().then(processText);
-    });
+  while (!done) {
+    const { value, done: doneReading } = await reader.read();
+    done = doneReading;
+    onRead(value);
+  }
 };
 
 const Result = ({ prompt }: Props) => {
