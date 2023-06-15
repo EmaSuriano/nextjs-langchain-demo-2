@@ -36,7 +36,6 @@ export async function GET(request: Request) {
   });
 
   const review = await overallChain.run(prompt);
-  console.log(review);
 
   return NextResponse.json({ text: review });
 }
