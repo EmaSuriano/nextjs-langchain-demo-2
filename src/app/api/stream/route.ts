@@ -46,5 +46,5 @@ export async function POST(request: Request) {
 
   const stream = runLLMChain(synopsisChain, prompt);
 
-  return new Response(await stream);
+  return new NextResponse(await stream);
 }
